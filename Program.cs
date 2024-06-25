@@ -22,9 +22,32 @@ if (communityUrl.Contains("@"))
 //get the title of the webpage by visiting it
 WebClient x = new WebClient();
 string title = Regex.Match(x.DownloadString(communityUrl), @"\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups["Title"].Value;
-title = title.Split('-')[0].Trim();
-
+var splitTitle = title.Split('-');
+title = "";
+for(int i = 0; i < splitTitle.Length-1; i++)
+{
+   title += splitTitle[i] + "-";
+}
+title = title.Trim('-');
+title = title.Trim();
 var markdown = $"**[{title}](/c/{communityName}@{serverHost})** | {serverHost} | [Kbin](/m/{communityName}@{serverHost}) | [lemmyverse.link](https://lemmyverse.link/c/{communityName}@{serverHost}) | ![](https://img.shields.io/lemmy/{communityName}@{serverHost}?style=flat&label=Subs&color=pink)";
 
 Console.WriteLine(markdown);
-ClipboardService.SetText(markdown);
+
+try
+{
+    ClipboardService.SetText(markdown);
+}
+catch
+{
+    Console.WriteLine("Failed to copy to clipboard");
+}
+
+try
+{
+    File.WriteAllText(title+".txt", markdown);
+}
+catch
+{
+    Console.WriteLine("Failed to write to file");
+}
