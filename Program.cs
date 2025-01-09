@@ -30,7 +30,7 @@ for(int i = 0; i < splitTitle.Length-1; i++)
 }
 title = title.Trim('-');
 title = title.Trim();
-var markdown = $"**[{title}](/c/{communityName}@{serverHost})** | {serverHost} | [Kbin](/m/{communityName}@{serverHost}) | [lemmyverse.link](https://lemmyverse.link/c/{communityName}@{serverHost}) | ![](https://img.shields.io/lemmy/{communityName}@{serverHost}?style=flat&label=Subs&color=pink)";
+var markdown = $"**[{title}](/c/{communityName}@{serverHost})** | {serverHost} | [Kbin](/m/{communityName}@{serverHost}) | [lemmyverse.link](https://lemmyverse.link/c/{communityName}@{serverHost}) | ![](https://img.shields.io/lemmy/{communityName}@{serverHost}?style=flat&label=Subs&cacheSeconds=172800&color=pink)";
 
 Console.WriteLine(markdown);
 
